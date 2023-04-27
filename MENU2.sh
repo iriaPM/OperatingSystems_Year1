@@ -2,7 +2,8 @@
 
 PS3="* Bash Commands *"
 options=("List files" "Show Free disk space" "Show system path" "Display command history" "Backup files" "Exit")
-FILENAME=$""
+HISTFILE=~/.bash_history
+set -o history
 menu()
 {
     echo *Please select an option:*
@@ -26,12 +27,10 @@ menu()
                 history;;
 
             "Backup files")
-                echo "backup files:"
-                echo "enter name of directory:"
-                file="$1"
-                read FILENAME
-                    cp *.txt   BackupFolder
-                    ls -l *;;
+                read -p "Enter name of directory" directory
+                mkdir BackupFolder
+                cp -r $directory BackupFolder
+                ls BackupFolder;;
 
             "Exit")
                 echo "exiting..."
